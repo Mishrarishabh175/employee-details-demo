@@ -1,0 +1,79 @@
+<div class="login-div">
+
+    <mat-card class="login-mat-card">
+
+        <mat-card-content>
+
+            <form (ngSubmit)="onSubmit()" [formGroup]="filterForm">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Filter</mat-label>
+                    <mat-select [(value)]="selected" #filter>
+                        <mat-option>None</mat-option>
+                        <mat-option value="firstName">First Name</mat-option>
+                        <mat-option value="secondName">Last Name</mat-option>
+                        <mat-option value="email">Email</mat-option>
+                        <mat-option value="location">Location</mat-option>
+                        <mat-option value="product">Product</mat-option>
+                        <mat-option value="role">Role</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill"
+                    *ngIf="filter.value=='firstName'">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" name="password" formControlName="firstName">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill"
+                    *ngIf="filter.value=='secondName'">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" name="password" formControlName="lastName">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill"
+                    *ngIf="filter.value=='email'">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" name="password" formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" *ngIf="filter.value=='role' ">
+                    <mat-label>Role</mat-label>
+                    <mat-select [value]="roles" formControlName="role">
+                        <mat-option *ngFor="let role of roles" [value]="role.name">{{role.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill" *ngIf="filter.value=='location' ">
+                    <mat-label>Location</mat-label>
+                    <mat-select [value]="locations" formControlName="location">
+                        <mat-option *ngFor="let location of locations" [value]="location.name">{{location.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill" *ngIf="filter.value=='product' ">
+                    <mat-label>Product</mat-label>
+                    <mat-select [value]="products" formControlName="product">
+                        <mat-option *ngFor="let product of products" [value]="product.name">{{product.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <button mat-flat-button type="button" color="primary" (click)="add()">APPLY FILTER</button>
+                <button type="submit" mat-flat-button color="primary">SEARCH</button>
+
+            </form>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let filter of filters " (removed)="remove(filter)">
+                    {{filter}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <!--  -->
+            </mat-chip-list>
+        </mat-card-content>
+
+    </mat-card>
+
+</div>
