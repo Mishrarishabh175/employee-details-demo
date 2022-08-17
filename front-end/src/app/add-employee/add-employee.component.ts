@@ -94,6 +94,7 @@ export class AddEmployeeComponent implements OnInit,OnDestroy {
     this.locationSubscription.unsubscribe();
     this.productSubscription.unsubscribe();
   }
+ 
   onSubmit(){
     if(!this.addEmployee.valid)
     {

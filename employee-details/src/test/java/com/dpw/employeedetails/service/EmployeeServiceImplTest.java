@@ -4,6 +4,7 @@ import com.dpw.employeedetails.entity.Employee;
 import com.dpw.employeedetails.entity.Location;
 import com.dpw.employeedetails.entity.ProductTeam;
 import com.dpw.employeedetails.entity.TestEntityGenerator;
+import com.dpw.employeedetails.exception.NotFoundException;
 import com.dpw.employeedetails.repository.AddressRepository;
 import com.dpw.employeedetails.repository.EmployeeRepository;
 import com.dpw.employeedetails.request.EmployeeRequest;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doThrow;
@@ -66,6 +68,7 @@ public class EmployeeServiceImplTest {
     }
     @Test
     public void givenEmployeeId_whenDeleteEmployees_thenThrowNotFoundException(){
-        doThrow(EmptyResultDataAccessException.class).when(employeeRepository.deleteById(anyLong()));
+        doThrow(EmptyResultDataAccessException.class).when(employeeRepository).deleteById(anyLong());
+        assertThrows( NotFoundException.class,()->employeeService.deleteEmployeeById(anyLong()));
     }
 }
